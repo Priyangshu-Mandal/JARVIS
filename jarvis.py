@@ -67,22 +67,6 @@ def takeCommand():
     return userInput
 
 
-def wait():
-    r = sr.Recognizer()
-    with sr.Microphone() as source:    # input from microphone is stored in source
-        r.pause_threshold = 1    # seconds of non-speaking
-        r.energy_threshold = 400    # you will have to shout!
-        audio = r.listen(source)    # 'listens' to source and stores the string in audio
-
-    try:
-        userInput = r.recognize_google(audio, language='en-in')    # recognize audio in Indian English using google engine
-
-    except Exception:
-        return "None"
-
-    return userInput
-
-
 if __name__ == '__main__':
     wishMe()
     while True:
@@ -170,16 +154,6 @@ if __name__ == '__main__':
         elif "open powershell" in query:
             codePath = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
             os.startfile(codePath)
-
-        # asking to wait
-        elif "wait" in query:
-            while True:
-                com = wait().lower()
-                if "start" in com:
-                    break
-                else:
-                    time.sleep(1)
-                pygame.time.Clock().tick(1)
 
         # switching Jarvis off
         elif "jarvis quit" in query:
